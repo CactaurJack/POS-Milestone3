@@ -20,6 +20,7 @@ using TheFlyingSaucer.Data.Drink;
 using mainWindow.EntreeCustomize;
 using mainWindow.SideCustomize;
 using mainWindow.DrinkCustomize;
+using System.IO;
 
 namespace mainWindow
 {
@@ -31,8 +32,13 @@ namespace mainWindow
         public Order Order;
         private List<IOrderItem> itemList;
         private int nextOrderNumber = 1;
+        public RoundRegister.ReciptPrinter printer;
+        CashDrawerInter cashDrawer = new CashDrawerInter();
+        //public StreamWriter outputFile;
         public MainWindow()
-        { 
+        {
+            //outputFile = new StreamWriter("receipts.txt");
+            printer = new RoundRegister.ReciptPrinter();
             Order = new Order(nextOrderNumber);
             InitializeComponent();
         }
@@ -46,6 +52,7 @@ namespace mainWindow
         /// <param name="e"></param>
         public void CrashedSaucer_Click(object sender, EventArgs e)
         {
+            
             CrashedSaucerCustom cscWindow = new CrashedSaucerCustom();
             CrashedSaucer cs = new CrashedSaucer();
             cscWindow.ShowDialog();
@@ -285,6 +292,9 @@ namespace mainWindow
             orderList();
         }
 
+        /// <summary>
+        /// Tabulates and formats how the output order box is shown
+        /// </summary>
         private void orderList()
         {
             orderListBox.Items.Clear();
@@ -309,11 +319,57 @@ namespace mainWindow
 
         }
 
+        /// <summary>
+        /// Handler for both cash and card payments
+        /// Card goes through always, but the enum within the RoundRegister namespace can handle all necessary options
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PlaceOrder_Click(object sender, RoutedEventArgs e)
         {
+            for(int i = 0; i < orderListBox.Items.Count; i++)
+            {
+                printer.PrintLine(orderListBox.Items[i].ToString());
+            }
+            if((bool)CardPayment.IsChecked)
+            {
+                printer.PrintLine("Order Paid by Debit/Credit Card");
+            }
+            else
+            {
+                ///
+                /// Cash handling section, more messy than it should be, but provides necessary information to the cash transaction menu
+                ///
+                printer.PrintLine("Order Paid by Cash");
+                CashMenu cMenu = new CashMenu(cashDrawer, Order.Total);
+                cMenu.QuarterCount.Content = cashDrawer.Quarters;
+                cMenu.DimesCount.Content = cashDrawer.Dimes;
+                cMenu.NicklesCount.Content = cashDrawer.Nickles;
+                cMenu.PennyCount.Content = cashDrawer.Pennies;
+                cMenu.OnesCount.Content = cashDrawer.Ones;
+                cMenu.FivesCount.Content = cashDrawer.Fives;
+                cMenu.TensCount.Content = cashDrawer.Tens;
+                cMenu.TwentiesCount.Content = cashDrawer.Twenties;
+
+                cMenu.cQuartersCount.Text = cashDrawer.cQuarters.ToString();
+                cMenu.cDimesCount.Text = cashDrawer.cDimes.ToString();
+                cMenu.cNicklesCount.Text = cashDrawer.cNickles.ToString();
+                cMenu.cPenniesCount.Text = cashDrawer.cPennies.ToString();
+                cMenu.cOnesCount.Text = cashDrawer.cOnes.ToString();
+                cMenu.cFivesCount.Text = cashDrawer.cFives.ToString();
+                cMenu.cTensCount.Text = cashDrawer.cTens.ToString();
+                cMenu.cTwentiesCount.Text = cashDrawer.cTwenties.ToString();
+                cMenu.ShowDialog();
+                printer.PrintLine("Amount Paid: " + cMenu.cTotal);
+                printer.PrintLine("Change Given: " + cMenu.ChangeTotal);
+            }
+            //outputFile.WriteLine(printer.CutTape());
+            printer.CutTape();
             orderListBox.Items.Clear();
-            Order = new Order(nextOrderNumber);
+
             nextOrderNumber++;
+            Order = new Order(nextOrderNumber);
+            
         }
 
         private void RemoveItem_Click(object sender, RoutedEventArgs e)

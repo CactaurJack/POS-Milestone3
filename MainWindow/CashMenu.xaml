@@ -1,0 +1,107 @@
+﻿<Window x:Class="mainWindow.CashMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:mainWindow"
+        mc:Ignorable="d"
+        Title="CashMenu" Height="450" Width="800">
+	<Window.Resources>
+		<ObjectDataProvider x:Key="dataSource" ObjectType="{x:Type local:CashDrawerInter}"/>
+	</Window.Resources>
+	<Window.DataContext>
+		<local:CashDrawerInter/>
+	</Window.DataContext>
+	<Grid DataContext="{Binding DataContext, RelativeSource={RelativeSource Self}}">
+		<Grid.RowDefinitions>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+		<Label HorizontalAlignment="Center" Grid.ColumnSpan="3" FontSize="25" FontWeight="ExtraBold">Current Drawer</Label>
+		<Label VerticalAlignment="Center" Grid.Row="1">Quarters</Label>
+		<Label VerticalAlignment="Center" Grid.Row="2">Dimes</Label>
+		<Label VerticalAlignment="Center" Grid.Row="3">Nickles</Label>
+		<Label VerticalAlignment="Center" Grid.Row="4">Pennies</Label>
+		<Label VerticalAlignment="Center" Grid.Row="5">Ones</Label>
+		<Label VerticalAlignment="Center" Grid.Row="6">Fives</Label>
+		<Label VerticalAlignment="Center" Grid.Row="7">Tens</Label>
+		<Label VerticalAlignment="Center" Grid.Row="8">Twenties</Label>
+
+		<Label VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Name="QuarterCount"></Label>
+		<Label VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Name="DimesCount"></Label>
+		<Label VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" Name="NicklesCount"></Label>
+		<Label VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" Name="PennyCount"></Label>
+		<Label VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" Name="OnesCount"></Label>
+		<Label VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" Name="FivesCount"></Label>
+		<Label VerticalAlignment="Center" Grid.Row="7" Grid.Column="1" Name="TensCount"></Label>
+		<Label VerticalAlignment="Center" Grid.Row="8" Grid.Column="1" Name="TwentiesCount"></Label>
+
+		<Label HorizontalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="3" FontSize="25" FontWeight="ExtraBold">Customer Payment</Label>
+		<Label VerticalAlignment="Center" Grid.Column="3" Grid.Row="1">Quarters</Label>
+		<Label VerticalAlignment="Center" Grid.Column="3" Grid.Row="2">Dimes</Label>
+		<Label VerticalAlignment="Center" Grid.Column="3" Grid.Row="3">Nickles</Label>
+		<Label VerticalAlignment="Center" Grid.Column="3" Grid.Row="4">Pennies</Label>
+		<Label VerticalAlignment="Center" Grid.Column="3" Grid.Row="5">Ones</Label>
+		<Label VerticalAlignment="Center" Grid.Column="3" Grid.Row="6">Fives</Label>
+		<Label VerticalAlignment="Center" Grid.Column="3" Grid.Row="7">Tens</Label>
+		<Label VerticalAlignment="Center" Grid.Column="3" Grid.Row="8">Twenties</Label>
+
+		<TextBox VerticalAlignment="Center" Grid.Column="4" Grid.Row="1" Name="cQuartersCount"></TextBox>
+		<TextBox VerticalAlignment="Center" Grid.Column="4" Grid.Row="2" Name="cDimesCount"></TextBox>
+		<TextBox VerticalAlignment="Center" Grid.Column="4" Grid.Row="3" Name="cNicklesCount"></TextBox>
+		<TextBox VerticalAlignment="Center" Grid.Column="4" Grid.Row="4" Name="cPenniesCount"></TextBox>
+		<TextBox VerticalAlignment="Center" Grid.Column="4" Grid.Row="5" Name="cOnesCount"></TextBox>
+		<TextBox VerticalAlignment="Center" Grid.Column="4" Grid.Row="6" Name="cFivesCount"></TextBox>
+		<TextBox VerticalAlignment="Center" Grid.Column="4" Grid.Row="7" Name="cTensCount"></TextBox>
+		<TextBox VerticalAlignment="Center" Grid.Column="4" Grid.Row="8" Name="cTwentiesCount"></TextBox>
+		<Button Grid.Column="4" Grid.Row="9" Name="Get_Change" Click="Get_Change_Click">Get Change</Button>
+
+		<Label VerticalAlignment="Center" Grid.Column="6" Grid.Row="1" Name="TotalCheck"></Label>
+		<Label VerticalAlignment="Center" Grid.Column="6" Grid.Row="2" Name="cTotalCheck"></Label>
+		<Label VerticalAlignment="Center" Grid.Column="6" Grid.Row="3" Name="DifferenceCheck"></Label>
+
+		<Label VerticalAlignment="Center" Grid.Column="7" Grid.Row="1">Quarters</Label>
+		<Label VerticalAlignment="Center" Grid.Column="7" Grid.Row="2">Dimes</Label>
+		<Label VerticalAlignment="Center" Grid.Column="7" Grid.Row="3">Nickles</Label>
+		<Label VerticalAlignment="Center" Grid.Column="7" Grid.Row="4">Pennies</Label>
+		<Label VerticalAlignment="Center" Grid.Column="7" Grid.Row="5">Ones</Label>
+		<Label VerticalAlignment="Center" Grid.Column="7" Grid.Row="6">Fives</Label>
+		<Label VerticalAlignment="Center" Grid.Column="7" Grid.Row="7">Tens</Label>
+		<Label VerticalAlignment="Center" Grid.Column="7" Grid.Row="8">Twenties</Label>
+
+		<Label VerticalAlignment="Center" Grid.Row="1" Grid.Column="8" Name="cQuartersCounts"></Label>
+		<Label VerticalAlignment="Center" Grid.Row="2" Grid.Column="8" Name="cDimesCounts"></Label>
+		<Label VerticalAlignment="Center" Grid.Row="3" Grid.Column="8" Name="cNicklesCounts"></Label>
+		<Label VerticalAlignment="Center" Grid.Row="4" Grid.Column="8" Name="cPenniesCounts"></Label>
+		<Label VerticalAlignment="Center" Grid.Row="5" Grid.Column="8" Name="cOnesCounts"></Label>
+		<Label VerticalAlignment="Center" Grid.Row="6" Grid.Column="8" Name="cFivesCounts"></Label>
+		<Label VerticalAlignment="Center" Grid.Row="7" Grid.Column="8" Name="cTensCounts"></Label>
+		<Label VerticalAlignment="Center" Grid.Row="8" Grid.Column="8" Name="cTwentiesCounts"></Label>
+
+		<Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Grid.Column="5" >Total -></Label>
+		<Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Grid.Column="5" >Money Given-></Label>
+		<Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="3" Grid.Column="5" >Change -></Label>
+		<Button Grid.Column="9" Grid.Row="0" Name="Cancel" Click="Cancel_Click">Cancel</Button>
+
+	</Grid>
+</Window>

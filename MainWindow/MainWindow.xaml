@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition/>
 			<RowDefinition/>
@@ -46,7 +46,7 @@
 				<Button Click="LivestockMutilation_Click" Grid.Row="0" Grid.Column="2" FontSize="1">Livestock Mutilation</Button>
 				<Button Click="NothingToSeeHere_Click" Grid.Row="0" Grid.Column="3" FontSize="1">Nothing To See Here</Button>
 				<Button Click="OuterOmlette_Click" Grid.Row="0" Grid.Column="4" FontSize="1">Outer Omlette</Button>
-				
+
 				<Button Click="SpaceScramble_Click" Grid.Row="1" Grid.Column="0" FontSize="1">Space Scramble</Button>
 				<Button Click="EvisceratedEggs_Click" Grid.Row="1" Grid.Column="2" FontSize="1">Eviscerated Eggs</Button>
 				<Button Click="GlowingHaystack_Click" Grid.Row="1" Grid.Column="3" FontSize="1">Glowing Haystack</Button>
@@ -59,13 +59,17 @@
 				<Button Click="SaucerFuel_Click" Grid.Row="3" Grid.Column="0" FontSize="1">Saucer Fuel</Button>
 				<Button Click="Water_Click" Grid.Row="3" Grid.Column="1" FontSize="1">Water</Button>
 
-				
-				
-				
+
+
+
 			</Grid>
 		</Viewbox>
 		<ListBox Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="4" Name="orderListBox" SelectionChanged="orderList_SelectionChanged">Current Order</ListBox>
-		<Button Click="PlaceOrder_Click" Grid.Column="4" Grid.Row="5" Grid.ColumnSpan="1" Name="PlaceOrder"> Place Order</Button>
+		<Button Click="PlaceOrder_Click" Grid.Column="4" Grid.Row="5" Grid.ColumnSpan="1" Name="PlaceOrder">Place Order</Button>
 		<Button Click="RemoveItem_Click" Grid.Column="6" Grid.Row="5" Grid.ColumnSpan="1" Name="RemoveItem">Remove Item</Button>
+		<ListBox Grid.Column="5" Grid.Row="5" Name="Payments">
+			<CheckBox IsChecked="False" Name="CardPayment" Grid.Column="5" Grid.Row="5">Card Payment</CheckBox>
+			<CheckBox IsChecked="False" Name="CashPayment" Grid.Column="5" Grid.Row="5">Cash Payment</CheckBox>
+		</ListBox>
 	</Grid>
 </Window>
